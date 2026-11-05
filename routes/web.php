@@ -1,16 +1,34 @@
 <?php
 
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
+use Illuminate\View\View;
 
 foreach (config('seo.pages') as $routeName => $page) {
-    Route::view($page['path'], 'home', [
-        'serviceArea' => $page['service_area'],
-        'areaIntro' => $page['area_intro'],
-        'pageTitle' => $page['title'],
-        'pageDescription' => $page['description'],
-        'breadcrumbLabel' => $page['breadcrumb_label'],
-        'canonicalUrl' => config('seo.site_url').($page['path'] === '/' ? '/' : $page['path']),
-    ])->name($routeName);
+    Route::get($page['path'], function (Request $request) use ($page): Response|View {
+        $requestPath = $request->getPathInfo();
+
+        if ($page['path'] !== '/' && str_ends_with($requestPath, '/')) {
+            $canonicalPath = rtrim($requestPath, '/');
+            $queryString = $request->getQueryString();
+
+            if ($queryString !== null) {
+                $canonicalPath .= '?'.$queryString;
+            }
+
+            return response('', 301, ['Location' => $canonicalPath]);
+        }
+
+        return view('home', [
+            'serviceArea' => $page['service_area'],
+            'areaIntro' => $page['area_intro'],
+            'pageTitle' => $page['title'],
+            'pageDescription' => $page['description'],
+            'breadcrumbLabel' => $page['breadcrumb_label'],
+            'canonicalUrl' => config('seo.site_url').($page['path'] === '/' ? '/' : $page['path']),
+        ]);
+    })->name($routeName);
 }
 
 Route::get('/sitemap.xml', function () {

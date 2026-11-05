@@ -8,7 +8,7 @@
     <title>@yield('title', 'Sewa AC Standing Tangerang & Ciledug | Sewa AC Portable untuk Acara')</title>
     <meta name="description" content="@yield('description', 'Sewa AC standing portable untuk acara di Tangerang dan Ciledug. Hubungi kami untuk ketersediaan unit dan biaya sewa.')">
     <link rel="canonical" href="{{ $canonicalUrl }}">
-    <link rel="icon" type="image/png" href="{{ asset('images/logo-sewa-ac.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/logo/logo2.png') }}">
     <meta property="og:locale" content="id_ID">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Sewa AC Standing">
@@ -21,6 +21,7 @@
     <meta name="twitter:title" content="@yield('title', 'Sewa AC Standing Tangerang & Ciledug')">
     <meta name="twitter:description" content="@yield('description', 'Sewa AC standing portable untuk acara di Tangerang dan Ciledug.')">
     <meta name="twitter:image" content="{{ config('seo.site_url') }}/images/3.webp">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     @php
         $seoSiteUrl = rtrim(config('seo.site_url'), '/');
         $homeCanonicalUrl = $seoSiteUrl . '/';
@@ -36,7 +37,7 @@
                     'url' => $homeCanonicalUrl,
                     'logo' => [
                         '@type' => 'ImageObject',
-                        'url' => $seoSiteUrl . '/images/logo-sewa-ac.png',
+                        'url' => $seoSiteUrl . '/images/logo/logo2.png',
                     ],
                     'telephone' => '+6285279761446',
                     'areaServed' => [
@@ -100,18 +101,15 @@
     <script type="application/ld+json">
         @json($structuredData, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)
     </script>
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-white font-sans text-slate-800 antialiased">
     <a href="#konten" class="sr-only z-50 rounded-lg bg-white p-3 text-slate-950 focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
         Lewati ke konten utama
     </a>
     @yield('content')
-    <a href="https://wa.me/6285279761446?text=Halo%2C%20saya%20butuh%20informasi%20sewa%20AC." target="_blank" rel="noopener noreferrer" aria-label="Hubungi kami melalui WhatsApp" class="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-3.5 text-sm font-extrabold text-white shadow-xl shadow-emerald-950/20 transition hover:bg-emerald-600 sm:bottom-7 sm:right-7">
-        <svg viewBox="0 0 24 24" fill="none" class="size-5" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-            <path d="M20 11.5a8.4 8.4 0 0 1-12.5 7.3L4 20l1.2-3.4A8.4 8.4 0 1 1 20 11.5Z" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M9 9.5c.4 2.2 1.7 3.5 4 4" stroke-linecap="round"/>
-        </svg>
+    <a href="https://wa.me/6285279761446?text=Halo%2C%20saya%20butuh%20informasi%20sewa%20AC." target="_blank" rel="noopener noreferrer" aria-label="Hubungi kami melalui WhatsApp" class="interactive-button whatsapp-float fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 bg-emerald-500 px-5 py-3.5 text-sm font-extrabold text-white shadow-xl shadow-emerald-950/20 transition hover:bg-emerald-600 sm:bottom-7 sm:right-7">
+        <i class="fa-brands fa-whatsapp" style="color: rgb(99, 230, 190);" aria-hidden="true"></i>
         WhatsApp
     </a>
 </body>
